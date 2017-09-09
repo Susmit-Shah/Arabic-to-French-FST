@@ -14,12 +14,24 @@ def letters_to_numbers():
     # Indicate that '1' is the initial state
     f1.add_state('start')
     f1.add_state('next')
-    
-    f1.add_state('replace1')
+    f1.add_state('remove')
+    f1.add_state('replace_1')
+    f1.add_state('replace_2')
+    f1.add_state('replace_3')
+    f1.add_state('replace_4')
+    f1.add_state('replace_5')
+    f1.add_state('replace_6')
     f1.initial_state = 'start'
 
     # Set all the final states
     f1.set_final('next')
+    f1.set_final('remove')
+    f1.set_final('replace_1')
+    f1.set_final('replace_2')
+    f1.set_final('replace_3')
+    f1.set_final('replace_4')
+    f1.set_final('replace_5')
+    f1.set_final('replace_6')
 
     remove = ['a', 'e', 'h', 'i', 'o', 'u', 'w', 'y']
     replace_1 = ['b', 'f', 'p', 'v']
@@ -34,27 +46,81 @@ def letters_to_numbers():
         # print letter
         f1.add_arc('start', 'next', (letter), (letter))
         if letter in remove:
-            f1.add_arc('next', 'next', (letter), (''))
+            f1.add_arc('next', 'remove', (letter), (''))
+            f1.add_arc('remove', 'remove', (letter), (''))
+            f1.add_arc('replace_1', 'remove', (letter), (''))
+            f1.add_arc('replace_2', 'remove', (letter), (''))
+            f1.add_arc('replace_3', 'remove', (letter), (''))
+            f1.add_arc('replace_4', 'remove', (letter), (''))
+            f1.add_arc('replace_5', 'remove', (letter), (''))
+            f1.add_arc('replace_6', 'remove', (letter), (''))
 
         if letter in replace_1:
-            f1.add_arc('next', 'next', (letter), ('1'))
+            f1.add_arc('next', 'replace_1', (letter), ('1'))
+            f1.add_arc('remove', 'replace_1', (letter), ('1'))
+            f1.add_arc('replace_1', 'replace_1', (letter), (''))
+            f1.add_arc('replace_2', 'replace_1', (letter), ('1'))
+            f1.add_arc('replace_3', 'replace_1', (letter), ('1'))
+            f1.add_arc('replace_4', 'replace_1', (letter), ('1'))
+            f1.add_arc('replace_5', 'replace_1', (letter), ('1'))
+            f1.add_arc('replace_6', 'replace_1', (letter), ('1'))
+
         #     f1.add_arc('next', 'replace1', (letter), ('1'))
         #     f1.add_arc('replace1', 'replace1', (letter), (''))
         # else:
         #     f1.add_arc('replace1', 'next', (), ())
 
         if letter in replace_2:
-            f1.add_arc('next', 'next', (letter), ('2'))
-        if letter in replace_3:
-            f1.add_arc('next', 'next', (letter), ('3'))
-        if letter in replace_4:
-            f1.add_arc('next', 'next', (letter), ('4'))
-        if letter in replace_5:
-            f1.add_arc('next', 'next', (letter), ('5'))
-        if letter in replace_6:
-            f1.add_arc('next', 'next', (letter), ('6'))
+            f1.add_arc('next', 'replace_2', (letter), ('2'))
+            f1.add_arc('remove', 'replace_2', (letter), ('2'))
+            f1.add_arc('replace_1', 'replace_2', (letter), ('2'))
+            f1.add_arc('replace_2', 'replace_2', (letter), (''))
+            f1.add_arc('replace_3', 'replace_2', (letter), ('2'))
+            f1.add_arc('replace_4', 'replace_2', (letter), ('2'))
+            f1.add_arc('replace_5', 'replace_2', (letter), ('2'))
+            f1.add_arc('replace_6', 'replace_2', (letter), ('2'))
 
-        # else:
+        if letter in replace_3:
+            f1.add_arc('next', 'replace_3', (letter), ('3'))
+            f1.add_arc('remove', 'replace_3', (letter), ('3'))
+            f1.add_arc('replace_1', 'replace_3', (letter), ('3'))
+            f1.add_arc('replace_2', 'replace_3', (letter), ('3'))
+            f1.add_arc('replace_3', 'replace_3', (letter), (''))
+            f1.add_arc('replace_4', 'replace_3', (letter), ('3'))
+            f1.add_arc('replace_5', 'replace_3', (letter), ('3'))
+            f1.add_arc('replace_6', 'replace_3', (letter), ('3'))
+
+        if letter in replace_4:
+            f1.add_arc('next', 'replace_4', (letter), ('4'))
+            f1.add_arc('remove', 'replace_4', (letter), ('4'))
+            f1.add_arc('replace_1', 'replace_4', (letter), ('4'))
+            f1.add_arc('replace_2', 'replace_4', (letter), ('4'))
+            f1.add_arc('replace_3', 'replace_4', (letter), ('4'))
+            f1.add_arc('replace_4', 'replace_4', (letter), (''))
+            f1.add_arc('replace_5', 'replace_4', (letter), ('4'))
+            f1.add_arc('replace_6', 'replace_4', (letter), ('4'))
+
+        if letter in replace_5:
+            f1.add_arc('next', 'replace_5', (letter), ('5'))
+            f1.add_arc('remove', 'replace_5', (letter), ('5'))
+            f1.add_arc('replace_1', 'replace_5', (letter), ('5'))
+            f1.add_arc('replace_2', 'replace_5', (letter), ('5'))
+            f1.add_arc('replace_3', 'replace_5', (letter), ('5'))
+            f1.add_arc('replace_4', 'replace_5', (letter), ('5'))
+            f1.add_arc('replace_5', 'replace_5', (letter), (''))
+            f1.add_arc('replace_6', 'replace_5', (letter), ('5'))
+
+        if letter in replace_6:
+            f1.add_arc('next', 'replace_6', (letter), ('6'))
+            f1.add_arc('remove', 'replace_6', (letter), ('6'))
+            f1.add_arc('replace_1', 'replace_6', (letter), ('6'))
+            f1.add_arc('replace_2', 'replace_6', (letter), ('6'))
+            f1.add_arc('replace_3', 'replace_6', (letter), ('6'))
+            f1.add_arc('replace_4', 'replace_6', (letter), ('6'))
+            f1.add_arc('replace_5', 'replace_6', (letter), ('6'))
+            f1.add_arc('replace_6', 'replace_6', (letter), (''))
+
+            # else:
         #     f1.add_arc('next', 'next', (letter),('9'))
 
         # elif letter in replace_1:
@@ -155,12 +221,13 @@ f1 = letters_to_numbers()
 f2 = truncate_to_three_digits()
 f3 = add_zero_padding()
 
-s = ['j', 'u', 'e', 'r', 't', 'y', 'b']
-p = ['j', 'u', 'r', 'a', 'f', 's', 'k', 'y']
+# s = ['j', 'u', 'e', 'r', 't', 'y', 'b']
+# p = ['j', 'u', 'r', 'a', 'f', 's', 'k', 'y']
 # trace(f1, p)
 # print(composechars(p, f1))
-# print "".join(f1.transduce(x for x in 'jeffersontthhggddzz'))
-# trace(f1, (x for x in 'jeffersontthhggdd'))
+k = 'peterson'
+print "".join(f1.transduce(x for x in k))
+trace(f1, (x for x in k))
 
 # print "".join(f2.transduce(x for x in 'j'))
 # trace(f2,(x for x in '1'))
