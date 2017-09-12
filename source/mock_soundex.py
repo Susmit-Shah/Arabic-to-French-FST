@@ -225,10 +225,12 @@ f3 = add_zero_padding()
 # p = ['j', 'u', 'r', 'a', 'f', 's', 'k', 'y']
 # trace(f1, p)
 # print(composechars(p, f1))
-k = 'peterson'
-print "".join(f1.transduce(x for x in k))
-trace(f1, (x for x in k))
 
+# k = 'peterson'
+# print "".join(f1.transduce(x for x in k))
+# trace(f1, (x for x in k))
+k = 'peterson'
+print(composechars(tuple(x for x in k), f1, f2, f3))
 # print "".join(f2.transduce(x for x in 'j'))
 # trace(f2,(x for x in '1'))
 
